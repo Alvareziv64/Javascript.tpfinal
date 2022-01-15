@@ -122,7 +122,7 @@ const productos = [
   },
 ];
 
-// Constantes y variabls
+// Constantes y variables
 const cards = document.getElementById("cards");
 const templateCard = document.getElementById("templateCard").content;
 const templateFooter = document.getElementById("templateFooter").content;
@@ -222,7 +222,8 @@ const crearFooter = () => {
     footer.innerHTML = `
         <th scope="row" colspan="S">Carrito vacío - ¡Comprá tu siguiente consola! </th>
         `;
-    dropdown.querySelector('span').textContent = `(0)`
+    dropdown.querySelector('span').textContent = `(0)` 
+    dropdown.querySelector('span').style.color = 'grey'
     return;
   } //Si el carrito esta en "0" dejo un mensaje 
 
@@ -239,7 +240,7 @@ const crearFooter = () => {
   templateFooter.querySelectorAll("td")[0].textContent = nCantidad; //Cantidad total
   templateFooter.querySelector("span").textContent = nPrecio; //Precio total
   dropdown.querySelector('span').textContent = `(${nCantidad})` //Cantidad total para el carrito en la navbar
-
+  dropdown.querySelector('span').style.color = 'white' //Si hay articulos en el carrito la cantida figura en blanco
   const clone = templateFooter.cloneNode(true);
   fragment.appendChild(clone);
   footer.appendChild(fragment);
@@ -269,3 +270,26 @@ const btnAccion = (e) => { //Botones para sumar y restar un producto del carrito
   }
   e.stopPropagation();
 };
+
+
+//api clima 
+
+let api = "https://api.openweathermap.org/data/2.5/weather?q=Buenos+aires&units=metric&appid=600e6d3042ac61534964bb90297d9bb4"
+
+
+$.get ( api , (datos)=> {
+
+    //console.log(datos)
+    
+    let contenido = `
+                         <div>
+                           <h5>${datos.name}</h5>
+                         </div>
+                         
+                         <div>
+                           <p class="info-clima"> Temp. Actual: ${datos.main.temp}°</p>            
+                         </div>
+                     `;
+    $(".clima").append(contenido);
+
+})
